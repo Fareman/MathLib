@@ -3,7 +3,7 @@
 /// <summary>
 /// Круг.
 /// </summary>
-public class Circle : Shape
+public class Circle : IShape
 {
     /// <summary>
     /// Радиус.
@@ -17,7 +17,7 @@ public class Circle : Shape
     public Circle(double r)
     {
         if (r <= 0)
-            throw new ArgumentException(nameof(r));
+            throw new ArgumentException("Радиус должен быть больше 0.");
 
         _radius = r;
     }
@@ -26,7 +26,7 @@ public class Circle : Shape
     /// Получение площади круга.
     /// </summary>
     /// <returns> Площадь фигуры. </returns>
-    public override double Square()
+    public double Square()
     {
         return Math.PI * Math.Pow(_radius, 2);
     }

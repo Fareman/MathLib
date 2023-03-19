@@ -3,7 +3,7 @@
 /// <summary>
 /// Треугольник.
 /// </summary>
-public class Triangle : Shape
+public class Triangle : IShape
 {
     /// <summary>
     /// Сторона треугольника.
@@ -46,7 +46,7 @@ public class Triangle : Shape
     /// Получение площади треугольника.
     /// </summary>
     /// <returns> Площадь треугольника. </returns>
-    public override double Square()
+    public double Square()
     {
         var s = (_sideA + _sideB + _sideC) / 2;
         return Math.Sqrt(s * (s - _sideA) * (s - _sideB) * (s - _sideC));
@@ -55,7 +55,7 @@ public class Triangle : Shape
     /// <summary>
     /// Проверка на правильность треугольника.
     /// </summary>
-    /// <returns></returns>
+    /// <returns> True - треугольник прямоугольный, иначе - False. </returns>
     private bool IsRight()
     {
         var sides = new List<double> { _sideA, _sideB, _sideC };

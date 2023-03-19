@@ -27,31 +27,51 @@ public class MathLibTests
         Assert.Throws<ArgumentException>(expression);
     }
 
-    [Fact]
-    public void TriagleSquare()
+    [Theory]
+    [InlineData(-1, 1, 1)]
+    [InlineData(1, -1, 1)]
+    [InlineData(1, 1, -1)]
+    public void CreateTriagleNegativeSideTest(double a, double b, double c)
     {
-        // Arrange
-        const double A = 3;
-        const double B = 6;
-        const double C = 7;
-
-        const double Answer = 8.9442719099991592;
-
         // Act
-        var result = new Triangle(A, B, C).Square();
+        var expression = () => new Triangle(a, b, c);
 
         // Assert
-        Assert.Equal(Answer, result);
+        Assert.Throws<ArgumentException>(expression);
     }
 
     [Theory]
-    [InlineData(3, 4, 5)]
-    public void IsTriangleRightPositiveTest(double a, double b, double c)
+    [InlineData(3, 6, 7, 8.9442719099991592)]
+    public void TriagleSquarePositiveTest(double a, double b, double c, double answer)
     {
-        const bool Answer = true;
+        // Act
+        var result = new Triangle(a, b, c).Square();
 
+        // Assert
+        Assert.Equal(answer, result);
+    }
+
+    [Theory]
+    [InlineData(3, 4, 5, true)]
+    public void IsTriangleRightPositiveTest(double a, double b, double c, bool answer)
+    {
         // Act
         var result = new Triangle(a, b, c).IsRightAngled;
+
+        // Assert
+        Assert.True(answer == result);
+    }
+
+    [Fact]
+    public void UnknownShapeTest()
+    {
+        // Arrange
+        const double Answer = 78.539816339744831;
+        const double Radius = 5;
+
+        // Act
+        var circle = ShapeFactory.CreateCircle(Radius);
+        var result = circle.Square();
 
         // Assert
         Assert.Equal(Answer, result);
